@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="assets/script.js" defer></script>
+	<script src="https://kit.fontawesome.com/c8353afffc.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -75,42 +76,47 @@
 		</nav>
 	</footer>
 
-	<!-- MODALE -->
-	<div id="modal" class="modal hidden">
-		<div class="modal-content">
-			<!-- Vue Galerie -->
-			<div id="modal-gallery-view" class="modal-view active">
-				<h3>Galerie Photo</h3>
-				<div class="modal-gallery" id="modal-gallery"></div>
-				<hr class="modal-separator">
-				<div class="modal-footer">
-					<button id="add-project-btn">Ajouter une photo</button>
-				</div>
-			</div>
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
 
-			<!-- Vue Ajout Projet -->
-			<div id="modal-add-view" class="modal-view">
-				<h3>Ajouter un projet</h3>
-				<form id="add-project-form" enctype="multipart/form-data">
-					<label for="image">Image</label>
-					<input type="file" name="image" id="image" accept="image/*" required>
+    <div id="modal-gallery-view" class="modal-view hidden">
+      <h3>Galerie Photo</h3>
+      <div class="modal-gallery" id="modal-gallery"></div>
+      <hr class="modal-separator">
+      <div class="modal-footer">
+        <button id="add-project-btn">Ajouter une photo</button>
+      </div>
+    </div>
 
-					<label for="title">Titre</label>
-					<input type="text" id="title" name="title" placeholder="Titre" required>
 
-					<label for="category-select">Catégorie</label>
-					<select name="category" id="category-select" required>
-						<option value="">-- Sélectionner une catégorie --</option>
-					</select>
+    <div id="modal-add-view" class="modal-view hidden">
+      <h3>Ajout photo</h3>
+		<form id="add-project-form" enctype="multipart/form-data">
+		<label for="image" class="upload-container">
+			<div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+			<div class="upload-button-style">+ Ajouter photo</div>
+			<div class="upload-info">jpg, png : 4mo max</div>
+			<input type="file" name="image" id="image" accept="image/*" required>
+			<img id="preview-image" src=""/>
+		</label>
 
-					<button type="submit">Valider</button>
-				</form>
-				<button id="back-to-gallery">← Retour</button>
-			</div>
+		<label for="title">Titre</label>
+		<input type="text" class="upload-title" id="title" name="title" required>
 
-			<!-- Fermer -->
-			<span class="close">&times;</span>
-		</div>
-	</div>
+		<label for="category-select" class="category-select">Catégorie</label>
+		<select name="category" id="category-select" required>
+			<option value=""></option>
+		</select>
+
+		<button id="validate" type="submit">Valider</button>
+		</form>
+
+      <button id="back-to-gallery"><i class="fa-solid fa-arrow-left"></i></button>
+    </div>
+
+    <span class="close">&times;</span>
+  </div>
+</div>
+
 </body>
 </html>
