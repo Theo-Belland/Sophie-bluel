@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadIcon = document.querySelector(".upload-icon");
   const uploadButton = document.querySelector(".upload-button-style");
   const uploadInfo = document.querySelector(".upload-info");
+  const btnBackToGallery = document.getElementById("back-to-gallery");
 
   async function reloadWorks() {
     try {
@@ -259,6 +260,20 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       reader.readAsDataURL(file);
     }
+
+  btnBackToGallery.addEventListener("click", () => {
+    viewAdd.classList.add("hidden");
+
+    viewGallery.classList.remove("hiddend");
+      previewImage.src = "";
+      previewImage.style.display = "none";
+      uploadIcon.style.display = "block";
+      uploadButton.style.display = "block";
+      uploadInfo.style.display = "block";
+
+      formAddProject.reset();
+
+  }) 
   });
   reloadWorks();
 });

@@ -145,6 +145,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	min-height: 489px;
 
 }
 #contact {
@@ -221,7 +222,7 @@ header a{
 }
 button{
 	margin-left: 10px;
-	margin-top: -56px;
+	margin-top: 10px;
 	margin-bottom: 30px;
 	border-radius: 20px;
 	min-width: 100px;
@@ -380,7 +381,7 @@ form{
 
 .modal-gallery img{
 	width: 76px;
-	height: auto;
+	min-height: 101px;
 	display: block;
 }
 
@@ -397,15 +398,14 @@ form{
 
 .close{
 	position: absolute;
-	top: 10px;
-	right: 15px;
-	font-size: 1.5em;
+	top: 15px;
+	right: 25px;
+	font-size: 31px;
 	cursor: pointer;
 }
 .modal-separator{
 	border: none;
 	border-top: 2px solid #ccc;
-	margin: 60px auto;
 	width: 80%;
 }
 
@@ -464,7 +464,11 @@ form{
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 237px;
+  height: 36px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -50px;
 }
 
 #add-project-form button[type="submit"]:hover {
@@ -480,10 +484,12 @@ form{
   align-self: center;
   font-size: 0.95em;
 }
-
-#back-to-gallery:hover {
-  color: #144e44;
-}
+ button#back-to-gallery{
+	margin-left: -600px;
+	margin-top: -717px;
+	font-size: 21px;
+	color: black;
+  }
 
 #image-preview {
   max-width: 100%;
@@ -525,7 +531,6 @@ form{
   }
 
   .upload-button-style {
-    display: inline-block;
     background-color: #CBD6DC;
     color: #306685;
     padding: 0.75rem 1.5rem;
@@ -534,7 +539,11 @@ form{
     font-size: 1rem;
     transition: background-color 0.2s ease;
 	margin-top: 10px;
-    pointer-events: none; /* pour éviter un double clic inutile */
+    pointer-events: none;
+	width: 173px;
+	height: 15px;
+	margin-left: auto;
+	margin-right: auto;
   }
   .upload-info {
     font-size: 0.9rem;
@@ -568,7 +577,7 @@ form{
   }
 
   #preview-image {
-    max-width: 240px;
+    max-width: 350px;
 	min-width: 200px;
 	max-height: 234px;
     margin-top: -33px;
@@ -593,11 +602,17 @@ form{
 
   button#validate{
 	margin-top: 10px;
+
   }
 
-  button#back-to-gallery{
-	margin-left: -600px;
-	margin-top: -630px;
-	font-size: 21px;
-	color: black;
-  }
+#add-project-form .modal-footer{
+	margin-top: 50px;
+}
+
+#add-project-form .modal-separator{
+	margin-top: 30px;
+}
+
+#modal-add-view #back-to-gallery i {
+	margin-top: 45px;
+}
