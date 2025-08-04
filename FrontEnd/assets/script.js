@@ -35,8 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayWorks(works) {
-    gallery.innerHTML = "";
 
+    if (!gallery) {
+      return
+    }
+
+    gallery.innerHTML = "";
+    
     if (works.length === 0) {
       gallery.textContent = "Aucun projet trouvé.";
       return;
@@ -53,8 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
       figure.appendChild(img);
       figure.appendChild(caption);
       gallery.appendChild(figure);
+
     });
   }
+
 
   filters.forEach(button => {
     button.addEventListener("click", () => {
@@ -246,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
-  
+  if(imageInput){
   imageInput.addEventListener('change', () => {
     const file = imageInput.files[0];
     if(file) {
@@ -260,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       reader.readAsDataURL(file);
     }
+    
 
   btnBackToGallery.addEventListener("click", () => {
     viewAdd.classList.add("hidden");
@@ -275,5 +283,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }) 
   });
+}
   reloadWorks();
 });
