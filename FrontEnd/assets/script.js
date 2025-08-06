@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.querySelector(".gallery");
   const filters = document.querySelectorAll("#filters button");
   const formLogin = document.getElementById("login-form");
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token"); 
   const loginLink = document.querySelector("nav li:nth-child(3)");
   const filtersWrapper = document.querySelector("#filters");
   const editionBar = document.getElementById("edition-bar");
@@ -35,13 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayWorks(works) {
-
     if (!gallery) {
-      return
+      return;
     }
 
     gallery.innerHTML = "";
-    
+
     if (works.length === 0) {
       gallery.textContent = "Aucun projet trouvé.";
       return;
@@ -58,10 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
       figure.appendChild(img);
       figure.appendChild(caption);
       gallery.appendChild(figure);
-
     });
   }
-
 
   filters.forEach(button => {
     button.addEventListener("click", () => {
@@ -94,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!response.ok) throw new Error("Erreur lors de la connexion");
 
         const data = await response.json();
-        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
         window.location.href = "index.html";
       } catch (error) {
         alert("Échec de la connexion : vérifiez vos identifiants");
@@ -104,10 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (token) {
+    document.body.classList.add("logged-in");
     loginLink.textContent = "logout";
     loginLink.style.cursor = "pointer";
     loginLink.addEventListener("click", () => {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       window.location.reload();
     });
 
@@ -160,7 +158,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const categories = await res.json();
         const select = document.getElementById("category-select");
 
-        select.innerHTML = "<option value=''></option>";
+        // Vide le select avant de rajouter des options
+        select.innerHTML = "";
+
+        // Option vide
+        const emptyOption = document.createElement("option");
+        emptyOption.value = "";
+        emptyOption.textContent = "";
+        select.appendChild(emptyOption);
 
         categories.forEach(cat => {
           const option = document.createElement("option");
@@ -175,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     formAddProject.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+
       const formData = new FormData(formAddProject);
 
       try {
@@ -253,36 +258,37 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   }
-  if(imageInput){
-  imageInput.addEventListener('change', () => {
-    const file = imageInput.files[0];
-    if(file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        previewImage.src = e.target.result;
-        previewImage.style.display = 'block';
-        uploadIcon.style.display = 'none';
-        uploadButton.style.display = 'none';
-        uploadInfo.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-    
 
-  btnBackToGallery.addEventListener("click", () => {
-    viewAdd.classList.add("hidden");
+  if (imageInput) {
+    imageInput.addEventListener('change', () => {
+      const file = imageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImage.src = e.target.result;
+          previewImage.style.display = 'block';
+          uploadIcon.style.display = 'none';
+          uploadButton.style.display = 'none';
+          uploadInfo.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
 
-    viewGallery.classList.remove("hiddend");
-      previewImage.src = "";
-      previewImage.style.display = "none";
-      uploadIcon.style.display = "block";
-      uploadButton.style.display = "block";
-      uploadInfo.style.display = "block";
+      btnBackToGallery.addEventListener("click", () => {
+        viewAdd.classList.add("hidden");
 
-      formAddProject.reset();
+        viewGallery.classList.remove("hidden");
+        previewImage.src = "";
+        previewImage.style.display = "none";
+        uploadIcon.style.display = "block";
+        uploadButton.style.display = "block";
+        uploadInfo.style.display = "block";
 
-  }) 
-  });
-}
+        formAddProject.reset();
+
+      });
+    });
+  }
+
   reloadWorks();
 });
